@@ -21,8 +21,8 @@ import java.util.List;
 public class CreateEventRequestDto {
     @NotBlank(message = "Name is required")
     String name;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    LocalDateTime start;
+    LocalDateTime end;
     @NotBlank(message = "Venue details are required")
     String venue;
     LocalDateTime salesStart;

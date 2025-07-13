@@ -20,8 +20,8 @@ import java.util.UUID;
 public class UpdateEventRequest {
 
     String name;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    LocalDateTime start;
+    LocalDateTime end;
     String venue;
     LocalDateTime salesStart;
     LocalDateTime salesEnd;

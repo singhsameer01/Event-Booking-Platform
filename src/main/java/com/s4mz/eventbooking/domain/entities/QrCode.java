@@ -37,7 +37,7 @@ public class QrCode {
 
 
     @CreatedDate
-    @Column(name = "created_at",updatable = false, nullable = false)
+    @Column(name = "created_at", updatable = false, nullable = false)
     LocalDateTime createdAt;
 
     @LastModifiedDate

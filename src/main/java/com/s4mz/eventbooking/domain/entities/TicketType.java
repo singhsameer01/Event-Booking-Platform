@@ -37,7 +37,7 @@ public class TicketType {
     @Column(name = "description")
     String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event_id")
     Event event;
 

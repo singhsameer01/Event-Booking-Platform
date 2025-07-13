@@ -12,6 +12,7 @@ import com.s4mz.eventbooking.exceptions.QrCodeGenerationException;
 import com.s4mz.eventbooking.repositories.QrCodeRepository;
 import com.s4mz.eventbooking.services.QrCodeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -23,6 +24,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class QrCodeServiceImpl implements QrCodeService {
 
     private static final int QR_HEIGHT=300;
@@ -44,6 +46,19 @@ public class QrCodeServiceImpl implements QrCodeService {
         }
         catch (WriterException | IOException e){
             throw  new QrCodeGenerationException("Failed to generate QR code", e);
+        }
+    }
+
+    @Override
+    public byte[] getQrCodeImageForUserAndTicket(UUID userId, UUID ticketId) {
+        QrCode qrCode= qrCodeRepository.findByTicketIdAndTicketPurchaserId(ticketId,userId)
+                .orElseThrow(()->new QrCodeGenerationException("QR code not found for user: "+userId+" and ticket: "+ticketId));
+        try{
+            return Base64.getDecoder().decode(qrCode.getValue());
+        }
+        catch (IllegalArgumentException e){
+            log.error("Failed to decode QR code image for user: {} and ticket: {}", userId, ticketId);
+            throw new QrCodeGenerationException("Failed to decode QR code image", e);
         }
     }
 

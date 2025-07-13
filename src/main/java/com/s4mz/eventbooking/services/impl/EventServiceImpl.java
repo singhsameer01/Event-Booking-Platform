@@ -52,8 +52,8 @@ public class EventServiceImpl implements EventService {
 
 
         event.setName(request.getName());
-        event.setStartDate(request.getStartDate());
-        event.setEndDate(request.getEndDate());
+        event.setStart(request.getStart());
+        event.setEnd(request.getEnd());
         event.setVenue(request.getVenue());
         event.setSalesStart(request.getSalesStart());
         event.setSalesEnd(request.getSalesEnd());
@@ -87,8 +87,8 @@ public class EventServiceImpl implements EventService {
                         ()->new EventUpdateException("Event with id: "+eventId+" not found")
                 );
         existingEvent.setName(request.getName());
-        existingEvent.setStartDate(request.getStartDate());
-        existingEvent.setEndDate(request.getEndDate());
+        existingEvent.setStart(request.getStart());
+        existingEvent.setEnd(request.getEnd());
         existingEvent.setVenue(request.getVenue());
         existingEvent.setSalesStart(request.getSalesStart());
         existingEvent.setSalesEnd(request.getSalesEnd());

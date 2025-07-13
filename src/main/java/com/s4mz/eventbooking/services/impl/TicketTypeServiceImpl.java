@@ -53,7 +53,7 @@ public class TicketTypeServiceImpl implements TicketTypeService {
         ticketType.setTicketsAvailable(ticketType.getTicketsAvailable() - 1);
         ticketTypeRepository.save(ticketType);
 
-        return ticketRepository.saveAndFlush(savedTicket);
+        return savedTicket;
 
     }
 }

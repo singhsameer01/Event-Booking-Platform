@@ -29,7 +29,7 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     TicketStatusEnum status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ticket_type_id")
     TicketType ticketType;
 

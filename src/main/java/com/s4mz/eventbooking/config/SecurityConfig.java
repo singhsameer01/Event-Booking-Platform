@@ -18,16 +18,22 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, UserProvisioningFilter filter) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            UserProvisioningFilter filter,
+            JwtAuthenticationConverter jwtAuthenticationConverter
+    ) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET,"/api/v1/published-events/**").permitAll()
+                        .requestMatchers("/api/v1/events").hasRole("ORGANIZER")
+                        .requestMatchers("/api/v1/ticket-validations").hasRole("STAFF")
                         .anyRequest().authenticated()
                 )
-
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(oauth2->oauth2.jwt(Customizer.withDefaults()))
+                .oauth2ResourceServer(oauth2->oauth2.jwt(jwt->
+                        jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)))
                 .addFilterAfter(filter, BearerTokenAuthenticationFilter.class);
 
         return http.build();

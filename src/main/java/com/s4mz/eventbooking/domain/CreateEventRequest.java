@@ -19,8 +19,8 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateEventRequest {
     String name;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    LocalDateTime start;
+    LocalDateTime end;
     String venue;
     LocalDateTime salesStart;
     LocalDateTime salesEnd;

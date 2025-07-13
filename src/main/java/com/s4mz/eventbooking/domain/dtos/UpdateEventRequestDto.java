@@ -22,8 +22,8 @@ import java.util.UUID;
 public class UpdateEventRequestDto {
 
     String name;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    LocalDateTime start;
+    LocalDateTime end;
     String venue;
     LocalDateTime salesStart;
     LocalDateTime salesEnd;
